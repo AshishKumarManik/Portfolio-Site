@@ -1,0 +1,432 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashish Manik | AI & Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #030303;
+            --primary-orange: #ff4500;
+            --accent-glow: rgba(255, 69, 0, 0.15);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Grainy Mesh Gradient Potion */
+            background: 
+                radial-gradient(at 0% 0%, hsla(18,100%,10%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(0,0%,0%,1) 0, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(18,100%,5%,1) 0, hsla(0,0%,0%,1) 100%);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-orange); }
+
+        /* --- Navigation Potion --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 40px;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        nav:hover { width: 95%; border-color: var(--primary-orange); }
+
+        .logo { font-size: 20px; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--primary-orange); }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover { color: var(--primary-orange); text-shadow: 0 0 10px var(--primary-orange); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+        }
+
+        .hero-text h4 {
+            color: var(--primary-orange);
+            font-size: 20px;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(40px, 8vw, 90px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h3 {
+            font-size: 24px;
+            color: var(--text-dim);
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        /* --- Floating Action Button --- */
+        .btn-main {
+            margin-top: 40px;
+            padding: 18px 45px;
+            background: var(--primary-orange);
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.4s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 20px 40px var(--accent-glow);
+        }
+
+        /* --- Profile Image with Liquid Effect --- */
+        .hero-img-box {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            border: 4px solid #ff4d00;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(225, 77, 0, 0.2);
+            margin: 0 auto;
+
+        }
+
+        .hero-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            100% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+        }
+
+        /* --- Skills Grid --- */
+        .section-title {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 60px;
+            letter-spacing: -2px;
+        }
+
+        .skills-container {
+            padding: 100px 10%;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 20px;
+            transition: 0.4s;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            background: rgba(255, 69, 0, 0.05);
+            border-color: var(--primary-orange);
+            transform: translateY(-10px);
+        }
+
+        .skill-card h3 { font-size: 40px; color: var(--primary-orange); margin-bottom: 10px; }
+
+        /* --- Projects Potion --- */
+        .projects { padding: 100px 10%; }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 35px;
+            position: relative;
+            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-orange);
+            background: rgba(10,10,10,0.8);
+        }
+
+        .project-card h2 { font-size: 28px; margin-bottom: 15px; }
+        .project-card p { color: var(--text-dim); margin-bottom: 25px; font-size: 15px; }
+
+        .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-right: 10px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .project-links { display: flex; gap: 15px; }
+        .p-link {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .git-link { background: #fff; color: #000; }
+        .lnk-link { border: 1px solid var(--primary-orange); color: var(--primary-orange); }
+
+        .p-link:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 10%;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            nav ul { display: none; }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 150px; }
+            .hero-img-box { width: 280px; height: 280px; margin-bottom: 40px; }
+            .hero-text h1 { font-size: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AK<span>.</span>MANIK</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Experience</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="mailto:ashishmanik2005@gmail.com">Contact</a></li>
+        </ul>
+        <div class="nav-socials">
+            <a href="https://github.com/AshishKumarManik" target="_blank" style="color:white;"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ashishkumarmanik/" target="_blank" style="color:white; margin-left: 15px;"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h4>Hi, <br>
+                I'm Ashish Manik</h4>
+            <h3><i>DEVELOPER & ENGINEER</i></h3>
+            <h1>BUILDING<br>INTELLIGENT<br>SOLUTIONS<span>.</span></h1>
+            <h3>Engineering Student specializing in AI and Computer Science. I turn complex data into user-friendly Full Stack experiences.</h3>
+            <a href="https://drive.google.com/file/d/1f-E0XFMmthC4PONC7N5wVBNX6eHE6uQK/view?usp=drive_link" class="btn-main">VIEW RESUME</a>
+        </div>
+        <div class="hero-img-box">
+            <img src="{% static 'profile.png' %}" alt="Ashish Kumar Manik">
+        </div>
+    </section>
+
+    <section class="skills-container" id="skills">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>90%</h3>
+                <p>Python & Django</p>
+            </div>
+            <div class="skill-card">
+                <h3>85%</h3>
+                <p>React & Node.js</p>
+            </div>
+            <div class="skill-card">
+                <h3>85%</h3>
+                <p>YOLO & OpenCV</p>
+            </div>
+            <div class="skill-card">
+                <h3>80%</h3>
+                <p>Cloud & DevOps</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2 class="section-title">Selected Works</h2>
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div>
+                    <span class="tag">AI</span><span class="tag">Computer Vision</span>
+                </div>
+                <h2 style="margin-top: 20px;">Smart Traffic System</h2>
+                <p>An intelligent management solution using computer vision to reduce urban congestion by 30% through real-time signal optimization.</p>
+                <div class="project-links">
+                    <a href="https://github.com/AshishKumarManik/Smart-Traffic-System" target="_blank" class="p-link git-link">
+                        <i class="fab fa-github"></i> CODE
+                    </a>
+                    <a href="https://www.linkedin.com/posts/ashishkumarmanik_ai-computervision-django-ugcPost-7458538940833148928-GyhF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD2uekUBR8STm4oxJg9CrVhqNyN2RLM_wNE" target="_blank" class="p-link lnk-link">
+                        <i class="fab fa-linkedin"></i> SHOWCASE
+                    </a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div>
+                    <span class="tag">Django</span><span class="tag">API Integration</span><span class="tag">Python</span>
+                </div>
+                <h2 style="margin-top: 20px;">Weather App</h2>
+                <p>A real-time weather engine built with Django and OpenWeatherMap API. Features dynamic UI changes based on meteorological data and asynchronous city lookups.</p>
+                <div class="project-links">
+                    <a href="https://github.com/AshishKumarManik/Weather-App" target="_blank" class="p-link git-link">
+                        <i class="fab fa-github"></i> CODE
+                    </a>
+                    <a href="https://www.linkedin.com/posts/ashishkumarmanik_webdevelopment-weatherapp-codingjourney-ugcPost-7366851428839010304-YMn4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD2uekUBR8STm4oxJg9CrVhqNyN2RLM_wNE" target="_blank" class="p-link lnk-link">
+                        <i class="fab fa-linkedin"></i> SHOWCASE
+                    </a>
+                </div>
+            </div>     
+
+            <div class="project-card">
+                <div>
+                    <span class="tag">Python</span><span class="tag">Game Logic</span>
+                </div>
+                <h2 style="margin-top: 20px;">Hangman Game</h2>
+                <p>A modular terminal-based word-guessing suite featuring random word selection, 
+            input validation, and automated replay logic.</p>
+                <div class="project-links">
+                    <a href="https://github.com/AshishKumarManik/CodeAlpha_HangmanGame" target="_blank" class="p-link git-link">
+                        <i class="fab fa-github"></i> CODE
+                    </a>
+                    <a href="https://www.linkedin.com/posts/ashishkumarmanik_hello-everyone-thrilled-ugcPost-7335996848257540096-kFYr?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD2uekUBR8STm4oxJg9CrVhqNyN2RLM_wNE" target="_blank" class="p-link lnk-link">
+                        <i class="fab fa-linkedin"></i> SHOWCASE
+                    </a>
+                </div>
+            </div>     
+
+            <div class="project-card">
+                <div>
+                    <span class="tag">Python</span><span class="tag">NLP</span>
+                </div>
+                <h2 style="margin-top: 20px;">Translator App</h2>
+                <p>Advanced GUI-based translation tool supporting 100+ languages with high-accuracy Deep Translator integration.</p>
+                <div class="project-links">
+                    <a href="https://github.com/AshishKumarManik/PINNAClE-lab_Translator_App" target="_blank" class="p-link git-link">
+                        <i class="fab fa-github"></i> CODE
+                    </a>
+                    <a href="https://www.linkedin.com/posts/ashishkumarmanik_python-tkinter-ai-ugcPost-7339556777497083904--bPE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD2uekUBR8STm4oxJg9CrVhqNyN2RLM_wNE" target="_blank" class="p-link lnk-link">
+                        <i class="fab fa-linkedin"></i> SHOWCASE
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div>
+                    <span class="tag">Tkinter</span><span class="tag">Python3.8</span><span class="tag">TextBlob</span>
+                </div>
+                <h2 style="margin-top: 20px;">AI Automation</h2>
+                <p>Enterprise-grade file management and web scraping suite designed to automate redundant data processing tasks.</p>
+                <div class="project-links">
+                    <a href="https://github.com/AshishKumarManik/PINNAClE-lab_AI-Autocorrect-Tool" target="_blank" class="p-link git-link">
+                        <i class="fab fa-github"></i> CODE
+                    </a>
+                    <a href="https://www.linkedin.com/posts/ashishkumarmanik_internship-pinnaclelabs-python-ugcPost-7340237109410131968-1wuv?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD2uekUBR8STm4oxJg9CrVhqNyN2RLM_wNE" target="_blank" class="p-link lnk-link">
+                        <i class="fab fa-linkedin"></i> SHOWCASE
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--text-dim); font-size: 14px;">Designed & Developed by Ashish Manik</p>
+    </footer>
+
+    <script>
+        // Smooth reveal on scroll potion
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, .project-card, .skill-card').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "all 0.8s ease-out";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
